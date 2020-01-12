@@ -1,0 +1,62 @@
+package fr.vylaria.api;
+
+import fr.vylaria.api.account.RedisAccount;
+import fr.vylaria.api.bungeecord.BungeeChannelApi;
+import fr.vylaria.api.commands.manager.CommandsManager;
+import fr.vylaria.api.data.redis.RedisConnection;
+import fr.vylaria.api.data.redis.RedisCredentials;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class VylariaAPI extends JavaPlugin
+{
+
+    public static VylariaAPI instance;
+
+    private RedisConnection redisConnection;
+    private RedisAccount redisAccount;
+
+    private CommandsManager commandsManager;
+
+    private BungeeChannelApi bungeeChannelApi;
+
+    @Override
+    public void onEnable()
+    {
+        instance = this;
+
+        redisConnection = new RedisConnection(new RedisCredentials("127.0.0.1", 6379, "bJEAc6z8TIuw7kPa", "root"), 0);
+        redisConnection.init();
+        redisAccount = new RedisAccount();
+
+        commandsManager = new CommandsManager(this);
+        commandsManager.register();
+
+        bungeeChannelApi = BungeeChannelApi.of(this);
+    }
+
+    @Override
+    public void onDisable()
+    {
+        instance = null;
+    }
+
+    public static VylariaAPI getInstance()
+    {
+        return instance;
+    }
+
+    public RedisConnection getRedisConnection()
+    {
+        return redisConnection;
+    }
+
+    public RedisAccount getRedisAccount()
+    {
+        return redisAccount;
+    }
+
+    public BungeeChannelApi getBungeeChannelApi()
+    {
+        return bungeeChannelApi;
+    }
+}

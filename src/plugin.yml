@@ -1,0 +1,17 @@
+name: VylariaAPI
+author: GeekLegend
+version: 1.0
+main: fr.vylaria.api.VylariaAPI
+commands:
+  rank:
+    aliases:
+      - "grades"
+  host:
+    aliases:
+      - "h"
+  coins:
+    aliases:
+      - "jetons"
+  eur:
+    aliases:
+      - "euros"
