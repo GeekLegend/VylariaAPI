@@ -10,8 +10,16 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.PlayerInventory;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class ModCommand implements CommandExecutor {
+
+    HashMap<Player, PlayerInventory> invs = new HashMap<>();
+    List<Player> vanishedPlayers = new ArrayList<Player>();
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -26,7 +34,8 @@ public class ModCommand implements CommandExecutor {
 
             if (!account.isModMode()){
                 //Metre en mode Mod
-                
+                invs.put(p, p.getInventory());
+                p.updateInventory();
 
             }else{
                 //Enlever le mode mod
