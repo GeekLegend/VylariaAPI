@@ -3,6 +3,7 @@ package fr.vylaria.api.servers;
 public enum ServerStatus
 {
 
+    NO_STATUS("Aucun status", "§c"),
     WAITING("En attente", "§a"),
     IN_GAME("En jeu", "§c"),
     FINISH("Fin", "§c");

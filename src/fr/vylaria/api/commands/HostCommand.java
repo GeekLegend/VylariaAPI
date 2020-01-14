@@ -2,7 +2,6 @@ package fr.vylaria.api.commands;
 
 import fr.vylaria.api.VylariaAPI;
 import fr.vylaria.api.account.Account;
-import fr.vylaria.api.account.AccountNoFoundException;
 import fr.vylaria.api.account.Rank;
 import fr.vylaria.api.account.RedisAccount;
 import fr.vylaria.api.host.HostManager;
@@ -64,14 +63,7 @@ public class HostCommand implements CommandExecutor
                         } else if (targetAccount.getSuffix().isEmpty())
                         {
                             targetAccount.setSuffix(suffix);
-
-                            try
-                            {
-                                redisAccount.update(targetAccount);
-                            } catch (AccountNoFoundException e)
-                            {
-                                e.printStackTrace();
-                            }
+                            redisAccount.update(targetAccount);
 
                             player.sendMessage(prefix + "§7Le joueur §e" + StringUtils.capitalize(args[1]) + " §7est désormais §eHost§7.");
                             target.sendMessage(prefix + "§7Vous êtes désormais §eHost§7.");
@@ -107,14 +99,7 @@ public class HostCommand implements CommandExecutor
                             if (!targetAccount.getSuffix().isEmpty())
                             {
                                 targetAccount.setSuffix("");
-
-                                try
-                                {
-                                    redisAccount.update(targetAccount);
-                                } catch (AccountNoFoundException e)
-                                {
-                                    e.printStackTrace();
-                                }
+                                redisAccount.update(targetAccount);
 
                                 player.sendMessage(prefix + "§7Le joueur §e" + StringUtils.capitalize(args[1]) + " §7n'est plus §eHost§7.");
                                 target.sendMessage(prefix + "§7Vous n'êtes plus §eHost§7.");

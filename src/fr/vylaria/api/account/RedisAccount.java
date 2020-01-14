@@ -48,7 +48,7 @@ public class RedisAccount implements IAccount
     }
 
     @Override
-    public void create(Account account) throws AccountNoFoundException
+    public void create(Account account)
     {
         Jedis jedis = RedisConnection.getInstance().getJedisPool().getResource();
         Map<String, String> data = new HashMap<String, String>();
@@ -68,13 +68,13 @@ public class RedisAccount implements IAccount
     }
 
     @Override
-    public void update(Account account) throws AccountNoFoundException
+    public void update(Account account)
     {
         create(account);
     }
 
     @Override
-    public void delete(Account account) throws AccountNoFoundException
+    public void delete(Account account)
     {
         Jedis jedis = RedisConnection.getInstance().getJedisPool().getResource();
         jedis.del(KEY + account.getUuid().toString());

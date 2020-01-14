@@ -2,7 +2,6 @@ package fr.vylaria.api.commands;
 
 import fr.vylaria.api.VylariaAPI;
 import fr.vylaria.api.account.Account;
-import fr.vylaria.api.account.AccountNoFoundException;
 import fr.vylaria.api.account.Rank;
 import fr.vylaria.api.account.RedisAccount;
 import fr.vylaria.api.money.MoneyManager;
@@ -67,14 +66,7 @@ public class EurCommand implements CommandExecutor
                             float newAmount = targetEur + amount;
 
                             targetAccount.setEur(newAmount);
-
-                            try
-                            {
-                                targetRedisAccount.update(targetAccount);
-                            } catch (AccountNoFoundException e)
-                            {
-                                e.printStackTrace();
-                            }
+                            targetRedisAccount.update(targetAccount);
 
                             player.sendMessage(prefix + "§7Vous venez de donner §e" + args[2] + " §7euros à " + StringUtils.capitalize(args[1]) + ".");
                             target.sendMessage(prefix + "§e" + args[2] + " §7euros vous on était ajouter.");
@@ -111,14 +103,7 @@ public class EurCommand implements CommandExecutor
                             float newAmount = targetEur - amount;
 
                             targetAccount.setEur(newAmount);
-
-                            try
-                            {
-                                targetRedisAccount.update(targetAccount);
-                            } catch (AccountNoFoundException e)
-                            {
-                                e.printStackTrace();
-                            }
+                            targetRedisAccount.update(targetAccount);
 
                             player.sendMessage(prefix + "§7Vous venez de retirer §e" + args[2] + " §7euros à " + StringUtils.capitalize(args[1]) + ".");
                             target.sendMessage(prefix + "§e" + args[2] + " §7euros vous on était retirer.");

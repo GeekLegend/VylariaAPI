@@ -5,12 +5,12 @@ import java.util.UUID;
 public interface IAccount
 {
 	
-	Account get(UUID uuid) throws AccountNoFoundException;
+	Account get(UUID uuid) throws AccountNotFoundException;
 	
-	void create(Account account) throws AccountNoFoundException;
+	void create(Account account) throws AccountNotFoundException;
 	
-	void delete(Account account) throws AccountNoFoundException;
+	void delete(Account account) throws AccountNotFoundException;
 	
-	void update(Account account) throws AccountNoFoundException;
+	void update(Account account) throws AccountNotFoundException;
 
 }

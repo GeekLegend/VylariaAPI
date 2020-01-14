@@ -2,7 +2,6 @@ package fr.vylaria.api.commands;
 
 import fr.vylaria.api.VylariaAPI;
 import fr.vylaria.api.account.Account;
-import fr.vylaria.api.account.AccountNoFoundException;
 import fr.vylaria.api.account.Rank;
 import fr.vylaria.api.account.RedisAccount;
 import fr.vylaria.api.rank.RankManager;
@@ -61,20 +60,12 @@ public class RankCommand implements CommandExecutor
 
                                 if (targetRank.getPower() <= playerRank.getPower())
                                 {
-                                    String rankName = args[2];
-                                    Rank rank = Rank.valueOf(rankName.toUpperCase());
+                                    Rank rank = Rank.getByPower(Integer.parseInt(args[2]));
 
                                     if (rank != null)
                                     {
                                         targetAccount.setRank(rank);
-
-                                        try
-                                        {
-                                            redisAccount.update(targetAccount);
-                                        } catch (AccountNoFoundException e)
-                                        {
-                                            e.printStackTrace();
-                                        }
+                                        redisAccount.update(targetAccount);
 
                                         player.sendMessage(prefix + "§aVous avez mis " + target.getName() + " " + rank.getColor() + rank.getPrefix().replace("[", "").replace("]", "") + "§a.");
                                         target.sendMessage(prefix + "§aVous êtes désormais " + rank.getColor() + rank.getPrefix().replace("[", "").replace("]", "") + "§a.");
