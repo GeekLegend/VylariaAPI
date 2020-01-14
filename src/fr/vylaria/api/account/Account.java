@@ -17,8 +17,9 @@ public class Account implements Cloneable
     private String lang;
     private Rank rank;
     private String suffix;
+    private boolean isModMode;
 
-    public Account(UUID uuid, String currentName, Timestamp firstConnection, Timestamp lastConnection, float coins, float eur, float playingTime, String nickName, String lang, Rank rank, String suffix)
+    public Account(UUID uuid, String currentName, Timestamp firstConnection, Timestamp lastConnection, float coins, float eur, float playingTime, String nickName, String lang, Rank rank, String suffix, boolean isModMode)
     {
         this.uuid = uuid;
         this.currentName = currentName;
@@ -31,6 +32,7 @@ public class Account implements Cloneable
         this.lang = lang;
         this.rank = rank;
         this.suffix = suffix;
+        this.isModMode = isModMode;
     }
 
     public UUID getUuid()
@@ -138,8 +140,13 @@ public class Account implements Cloneable
 		return suffix;
 	}
 
-	public void setSuffix(String suffix)
-	{
-		this.suffix = suffix;
-	}
+	public void setSuffix(String suffix) { this.suffix = suffix; }
+
+    public boolean isModMode() {
+        return isModMode;
+    }
+
+    public void setModMode(boolean modMode) {
+        isModMode = modMode;
+    }
 }

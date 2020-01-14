@@ -1,10 +1,7 @@
 package fr.vylaria.api.commands.manager;
 
 import fr.vylaria.api.VylariaAPI;
-import fr.vylaria.api.commands.CoinCommand;
-import fr.vylaria.api.commands.EurCommand;
-import fr.vylaria.api.commands.HostCommand;
-import fr.vylaria.api.commands.RankCommand;
+import fr.vylaria.api.commands.*;
 import fr.vylaria.api.interfaces.IManager;
 
 public class CommandsManager implements IManager
@@ -24,5 +21,6 @@ public class CommandsManager implements IManager
         instance.getCommand("host").setExecutor(new HostCommand());
         instance.getCommand("coins").setExecutor(new CoinCommand());
         instance.getCommand("eur").setExecutor(new EurCommand());
+        instance.getCommand("mod").setExecutor(new ModCommand());
     }
 }
