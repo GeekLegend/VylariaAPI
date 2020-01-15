@@ -49,7 +49,7 @@ public class VylariaAPI extends JavaPlugin
         eventsManager.register();
 
         try {
-            sc = new SocketConnection("ip", 24);
+            sc = new SocketConnection("play.vylaria.eu", 8080);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
