@@ -5,8 +5,12 @@ import fr.vylaria.api.bungeecord.BungeeChannelApi;
 import fr.vylaria.api.commands.manager.CommandsManager;
 import fr.vylaria.api.data.redis.RedisConnection;
 import fr.vylaria.api.data.redis.RedisCredentials;
+import fr.vylaria.api.events.manager.EventsManager;
 import fr.vylaria.api.inventory.InventoryUtils;
+import fr.vylaria.api.socket.SocketConnection;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.net.URISyntaxException;
 
 public class VylariaAPI extends JavaPlugin
 {
@@ -17,10 +21,13 @@ public class VylariaAPI extends JavaPlugin
     private RedisAccount redisAccount;
 
     private CommandsManager commandsManager;
+    private EventsManager eventsManager;
 
     private BungeeChannelApi bungeeChannelApi;
 
     private InventoryUtils iu;
+
+    private SocketConnection sc;
 
     @Override
     public void onEnable()
@@ -37,6 +44,10 @@ public class VylariaAPI extends JavaPlugin
         bungeeChannelApi = BungeeChannelApi.of(this);
 
         iu = new InventoryUtils();
+
+        eventsManager = new EventsManager(this);
+        eventsManager.register();
+
     }
 
     @Override

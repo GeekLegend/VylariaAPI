@@ -29,10 +29,11 @@ public class InventoryUtils
     public void restore(Player player)
     {
         player.getInventory().clear();
-        player.getInventory().setArmorContents(armorContents.get(player));
-        player.getInventory().setContents(contents.get(player));
-        player.updateInventory();
-
+        if (contents.containsKey(player)){
+            player.getInventory().setArmorContents(armorContents.get(player));
+            player.getInventory().setContents(contents.get(player));
+            player.updateInventory();
+        }
         armorContents.remove(player);
         contents.remove(player);
     }

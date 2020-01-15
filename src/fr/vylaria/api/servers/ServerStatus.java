@@ -6,7 +6,8 @@ public enum ServerStatus
     NO_STATUS("Aucun status", "§c"),
     WAITING("En attente", "§a"),
     IN_GAME("En jeu", "§c"),
-    FINISH("Fin", "§c");
+    FINISH("Fin", "§c"),
+    RESTART("Redémmarage", "§c");
 
     private String name;
     private String nameColor;

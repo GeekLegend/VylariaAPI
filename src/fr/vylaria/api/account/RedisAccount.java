@@ -36,8 +36,8 @@ public class RedisAccount implements IAccount
                 String nickName = data.get("nickName");
                 String lang = data.get("lang");
                 int rank = Integer.valueOf(data.get("rank"));
-                boolean isModMode = Boolean.getBoolean(data.get("isModMode"));
                 String suffix = data.get("suffix");
+                boolean isModMode = Boolean.parseBoolean(data.get("isModMode"));
                 jedis.close();
                 return new Account(uuid, currentName, firstConnection, lastConnection, coins, eur, playingTime, nickName, lang, Rank.getByPower(rank), suffix, isModMode);
             }

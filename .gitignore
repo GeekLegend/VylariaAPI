@@ -21,12 +21,5 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-.idea/libraries/spigot_1_8_8.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/VylariaAPI.iml
-.idea/artifacts/Plugin.xml
-.idea/libraries/jedis_3_1_0.xml
-.idea/libraries/commons_pool2_2_8_0.xml
-.idea/libraries/slf4j_api_1_7_25.xml
-.idea/libraries/slf4j_simple_2_0_0_alpha1.xml
+.idea/
+bin/
