@@ -46,6 +46,12 @@ public class PlayerEvent implements Listener {
     }
 
     @EventHandler
+    public void onPlayerInteract(PlayerInteractEvent e){
+        Player p = e.getPlayer();
+        Action a = e.getAction();
+    }
+
+    @EventHandler
     public void onPlayerMove(PlayerMoveEvent e){
         Player p = e.getPlayer();
         if (freezePlayers.contains(p)){
