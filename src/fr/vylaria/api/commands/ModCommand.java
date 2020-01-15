@@ -37,10 +37,11 @@ public class ModCommand implements CommandExecutor {
         if (playerRank.getPower() >= Rank.MODERATOR.getPower()){
 
             if (!account.isModMode()){
+                System.out.printf("cc");
                 //Metre en mode Mod
                 VylariaAPI.getInstance().getIu().save(p);
 
-                //Item 1: VanishItem
+                /*//Item 1: VanishItem
                 ItemStack vanish = new ItemStack(Material.IRON_HOE);
                 ItemMeta vanishIM = vanish.getItemMeta();
                 vanishIM.setDisplayName(ChatColor.BLUE + "Vanish");
@@ -54,11 +55,13 @@ public class ModCommand implements CommandExecutor {
 
                 //Set dans l'inventaire
                 p.getInventory().setItem(0, vanish);
-                p.getInventory().setItem(1, freeze);
+                p.getInventory().setItem(1, freeze);*/
 
                 account.setModMode(true);
                 redisAccount.update(account);
+                System.out.println(account.isModMode());
             }else{
+                System.out.println("ccc");
                 //Enlever le mode mod
                 account.setModMode(false);
                 redisAccount.update(account);

@@ -147,6 +147,6 @@ public class Account implements Cloneable
     }
 
     public void setModMode(boolean modMode) {
-        isModMode = modMode;
+        this.isModMode = modMode;
     }
 }

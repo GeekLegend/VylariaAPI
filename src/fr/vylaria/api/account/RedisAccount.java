@@ -64,6 +64,7 @@ public class RedisAccount implements IAccount
         data.put("lang", account.getLang());
         data.put("rank", Integer.toString(account.getRank().getPower()));
         data.put("suffix", account.getSuffix());
+        data.put("isModMode", Boolean.toString(account.isModMode()));
         jedis.hmset(KEY + account.getUuid().toString(), data);
         jedis.close();
     }
