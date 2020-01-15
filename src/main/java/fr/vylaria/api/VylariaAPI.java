@@ -48,6 +48,13 @@ public class VylariaAPI extends JavaPlugin
         eventsManager = new EventsManager(this);
         eventsManager.register();
 
+        try {
+            sc = new SocketConnection("ip", 24);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     @Override
@@ -78,5 +85,9 @@ public class VylariaAPI extends JavaPlugin
 
     public InventoryUtils getIu() {
         return iu;
+    }
+
+    public SocketConnection getSocketConnection() {
+        return sc;
     }
 }

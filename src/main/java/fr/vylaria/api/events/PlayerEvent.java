@@ -3,6 +3,7 @@ package fr.vylaria.api.events;
 import fr.vylaria.api.VylariaAPI;
 import fr.vylaria.api.account.Account;
 import fr.vylaria.api.account.RedisAccount;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -11,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 import java.util.ArrayList;
@@ -49,6 +51,11 @@ public class PlayerEvent implements Listener {
         if (freezePlayers.contains(p)){
             e.setCancelled(true);
         }
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent e){
+        VylariaAPI.getInstance().getSocketConnection().send("newPlayer", Bukkit.getMotd());
     }
 
 }

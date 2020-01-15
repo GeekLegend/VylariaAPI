@@ -21,4 +21,9 @@ public class SocketConnection {
         this.socket.emit(channel, data);
     }
 
+    public Socket getSocket(){
+        return this.socket;
+    }
+
+
 }

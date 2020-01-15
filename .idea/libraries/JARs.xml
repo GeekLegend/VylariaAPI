@@ -1,15 +1,11 @@
 <component name="libraryTable">
   <library name="JARs">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Documents/JARs/commons-pool2-2.8.0.jar!/" />
       <root url="jar://$USER_HOME$/Documents/JARs/jedis-3.1.0.jar!/" />
       <root url="jar://$USER_HOME$/Documents/JARs/slf4j-api-1.7.25.jar!/" />
       <root url="jar://$USER_HOME$/Documents/JARs/slf4j-simple-2.0.0-alpha1.jar!/" />
-      <root url="jar://$USER_HOME$/Documents/JARs/spigot-1.8.8.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/Documents/JARs/spigot-1.8.8.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>
