@@ -37,9 +37,8 @@ public class RedisAccount implements IAccount
                 String lang = data.get("lang");
                 int rank = Integer.valueOf(data.get("rank"));
                 String suffix = data.get("suffix");
-                boolean isModMode = Boolean.parseBoolean(data.get("isModMode"));
                 jedis.close();
-                return new Account(uuid, currentName, firstConnection, lastConnection, coins, eur, playingTime, nickName, lang, Rank.getByPower(rank), suffix, isModMode);
+                return new Account(uuid, currentName, firstConnection, lastConnection, coins, eur, playingTime, nickName, lang, Rank.getByPower(rank), suffix);
             }
         } catch (Exception e)
         {
@@ -64,7 +63,6 @@ public class RedisAccount implements IAccount
         data.put("lang", account.getLang());
         data.put("rank", Integer.toString(account.getRank().getPower()));
         data.put("suffix", account.getSuffix());
-        data.put("isModMode", Boolean.toString(account.isModMode()));
         jedis.hmset(KEY + account.getUuid().toString(), data);
         jedis.close();
     }

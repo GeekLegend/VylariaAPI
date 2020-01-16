@@ -21,9 +21,12 @@ public class RedisSetting implements ISetting
             data = jedis.hgetAll(KEY + uuid.toString());
             if (data.size() > 0)
             {
-                boolean isEnabled = Boolean.valueOf(data.get("isEnabled"));
+                boolean isVanishEnabled = Boolean.parseBoolean(data.get("isVanishEnabled"));
+                boolean isSpeedEnabled = Boolean.parseBoolean(data.get("isSpeedEnabled"));
+                boolean isModMode = Boolean.parseBoolean(data.get("isModMode"));
+                boolean isModVanish = Boolean.parseBoolean(data.get("isModVanish"));
                 jedis.close();
-                return new Setting(uuid, isEnabled);
+                return new Setting(uuid, isVanishEnabled, isSpeedEnabled, isModMode, isModVanish);
             }
         } catch (Exception e)
         {
@@ -38,7 +41,10 @@ public class RedisSetting implements ISetting
         Jedis jedis = RedisConnection.getInstance().getJedisPool().getResource();
         Map<String, String> data = new HashMap<String, String>();
         data.put("uuid", setting.getUuid().toString());
-        data.put("isEnabled", String.valueOf(setting.isEnabled()));
+        data.put("isVanishEnabled", String.valueOf(setting.isVanishEnabled()));
+        data.put("isSpeedEnabled", String.valueOf(setting.isSpeedEnabled()));
+        data.put("isModMode", String.valueOf(setting.isModMode()));
+        data.put("isModVanish", String.valueOf(setting.isModVanish()));
         jedis.hmset(KEY + setting.getUuid().toString(), data);
         jedis.close();
     }

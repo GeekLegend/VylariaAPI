@@ -7,7 +7,7 @@ public enum ServerStatus
     WAITING("En attente", "§a"),
     IN_GAME("En jeu", "§c"),
     FINISH("Fin", "§c"),
-    RESTART("Redémmarage", "§c");
+    RESTART("Redémarage", "§c");
 
     private String name;
     private String nameColor;

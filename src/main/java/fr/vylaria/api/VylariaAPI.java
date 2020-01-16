@@ -1,6 +1,7 @@
 package fr.vylaria.api;
 
 import fr.vylaria.api.account.RedisAccount;
+import fr.vylaria.api.account.settings.RedisSetting;
 import fr.vylaria.api.bungeecord.BungeeChannelApi;
 import fr.vylaria.api.commands.manager.CommandsManager;
 import fr.vylaria.api.data.redis.RedisConnection;
@@ -19,6 +20,7 @@ public class VylariaAPI extends JavaPlugin
 
     private RedisConnection redisConnection;
     private RedisAccount redisAccount;
+    private RedisSetting redisSetting;
 
     private CommandsManager commandsManager;
     private EventsManager eventsManager;
@@ -38,6 +40,8 @@ public class VylariaAPI extends JavaPlugin
         redisConnection.init();
         redisAccount = new RedisAccount();
 
+        redisSetting = new RedisSetting();
+
         commandsManager = new CommandsManager(this);
         commandsManager.register();
 
@@ -54,12 +58,14 @@ public class VylariaAPI extends JavaPlugin
             e.printStackTrace();
         }
 
+        sc.send("refreshServerStatus", this.getServer().getMotd());
 
     }
 
     @Override
     public void onDisable()
     {
+        sc.send("refreshServerStatus", this.getServer().getMotd());
         instance = null;
     }
 
@@ -78,6 +84,10 @@ public class VylariaAPI extends JavaPlugin
         return redisAccount;
     }
 
+    public RedisSetting getRedisSetting() {
+        return redisSetting;
+    }
+
     public BungeeChannelApi getBungeeChannelApi()
     {
         return bungeeChannelApi;
@@ -90,4 +100,5 @@ public class VylariaAPI extends JavaPlugin
     public SocketConnection getSocketConnection() {
         return sc;
     }
+
 }
