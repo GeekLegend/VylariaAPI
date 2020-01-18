@@ -89,6 +89,7 @@ public class ModCommand implements CommandExecutor {
             p.setAllowFlight(false);
 
             setting.setModMode(false);
+            setting.setModVanish(false);
             redisSetting.update(setting);
             VylariaAPI.getInstance().getIu().restore(p);
         }

@@ -18,15 +18,15 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
 
-public class SSInventory extends AbstractInventory implements Listener {
+public class SanctionInventory extends AbstractInventory implements Listener {
 
     private String player;
 
-    public SSInventory() {
-        super(6*9, "SS >> ");
+    public SanctionInventory() {
+        super(6*9, "SS >> <player>");
     }
 
-    public SSInventory(String player) {
+    public SanctionInventory(String player) {
         super(6*9, "SS >> " + player);
         this.player = player;
     }
@@ -36,6 +36,10 @@ public class SSInventory extends AbstractInventory implements Listener {
 
         RedisAccount redisAccount = VylariaAPI.getInstance().getRedisAccount();
         Account account = redisAccount.get(p.getUniqueId());
+
+        String tempName = name.replace("<player>", p.getName());
+
+        inventory = Bukkit.createInventory(null, size, tempName);
 
         inventory.setItem(0, new ItemBuilder(Material.STAINED_GLASS_PANE).setDurability((byte) 1).setName(" ").toItemStack());
         inventory.setItem(1, new ItemBuilder(Material.STAINED_GLASS_PANE).setDurability((byte) 1).setName(" ").toItemStack());
@@ -52,11 +56,11 @@ public class SSInventory extends AbstractInventory implements Listener {
         inventory.setItem(10, new ItemBuilder(Material.PAPER).setName("§6Messages")
                 .setLore("§fSanctions liées au §bcontenu §fd'un message"," ","§a> §fClic gauche pour ouvrir")
                 .toItemStack());
-        inventory.setItem(11, new ItemBuilder(Material.BOW).setName("§Gameplay")
+        inventory.setItem(11, new ItemBuilder(Material.BOW).setName("§6Gameplay")
                 .setLore("§fSanctions liées au §bcomportement en jeu §f(anti-jeu)"," ","§a> §fClic gauche pour ouvrir")
                 .toItemStack());
-        inventory.setItem(11, new ItemBuilder(Material.BOW).setName("§Gameplay")
-                .setLore("§fSanctions liées au §bcomportement en jeu §f(anti-jeu)"," ","§a> §fClic gauche pour ouvrir")
+        inventory.setItem(12, new ItemBuilder(Material.GOLDEN_APPLE).setDurability((byte) 1).setName("§6Triche")
+                .setLore("§fSanctions liées à l'utilisation de la §btriche"," ","§a> §fClic gauche pour ouvrir")
                 .toItemStack());
         inventory.setItem(17, new ItemBuilder(Material.STAINED_GLASS_PANE).setDurability((byte) 1).setName(" ").toItemStack());
         inventory.setItem(18, new ItemBuilder(Material.STAINED_GLASS_PANE).setDurability((byte) 1).setName(" ").toItemStack());
@@ -87,7 +91,7 @@ public class SSInventory extends AbstractInventory implements Listener {
         ClickType clickType = event.getClick();
         ItemStack item = event.getCurrentItem();
 
-        if (inventory != null && inventory.getName().startsWith(name))
+        if (inventory != null && inventory.getName().startsWith("SS >> ") && !inventory.getName().startsWith("SS >> Messages >>"))
         {
             event.setCancelled(true);
 
@@ -98,6 +102,8 @@ public class SSInventory extends AbstractInventory implements Listener {
                     case BARRIER:
                         if (clickType.isLeftClick()) player.closeInventory();
                         break;
+                    case PAPER:
+                        if (clickType.isLeftClick()) player.openInventory(VylariaAPI.getInstance().getInventoryManager().getSanctionMessagesInventory().create(player));
                     default:
                         break;
                 }

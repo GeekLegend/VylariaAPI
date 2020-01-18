@@ -1,5 +1,6 @@
 package fr.vylaria.api.inventory;
 
+import fr.vylaria.api.sanctions.Sanctions;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -33,5 +34,9 @@ public abstract class AbstractInventory
     public String getName()
     {
         return name;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 }

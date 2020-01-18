@@ -22,5 +22,6 @@ public class EventsManager implements IManager {
         instance.getServer().getPluginManager().registerEvents(new PlayerQuitListener(), instance);
         instance.getServer().getPluginManager().registerEvents(new BlockBreakListener(), instance);
         instance.getServer().getPluginManager().registerEvents(new BlockPlaceListener(), instance);
+        instance.getServer().getPluginManager().registerEvents(new PlayerChatListener(), instance);
     }
 }

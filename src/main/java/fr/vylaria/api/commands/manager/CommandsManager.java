@@ -22,6 +22,6 @@ public class CommandsManager implements IManager
         instance.getCommand("coins").setExecutor(new CoinCommand());
         instance.getCommand("eur").setExecutor(new EurCommand());
         instance.getCommand("mod").setExecutor(new ModCommand());
-        instance.getCommand("ss").setExecutor(new SSCommand());
+        instance.getCommand("ss").setExecutor(new SanctionCommand());
     }
 }

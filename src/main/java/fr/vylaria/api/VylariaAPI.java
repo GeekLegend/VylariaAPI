@@ -2,6 +2,7 @@ package fr.vylaria.api;
 
 import fr.vylaria.api.account.RedisAccount;
 import fr.vylaria.api.account.ban.RedisBan;
+import fr.vylaria.api.account.mute.RedisMute;
 import fr.vylaria.api.account.settings.RedisSetting;
 import fr.vylaria.api.bungeecord.BungeeChannelApi;
 import fr.vylaria.api.commands.manager.CommandsManager;
@@ -24,6 +25,7 @@ public class VylariaAPI extends JavaPlugin
     private RedisAccount redisAccount;
     private RedisSetting redisSetting;
     private RedisBan redisBan;
+    private RedisMute redisMute;
 
     private CommandsManager commandsManager;
     private EventsManager eventsManager;
@@ -46,6 +48,7 @@ public class VylariaAPI extends JavaPlugin
         redisAccount = new RedisAccount();
         redisSetting = new RedisSetting();
         redisBan = new RedisBan();
+        redisMute = new RedisMute();
 
         commandsManager = new CommandsManager(this);
         commandsManager.register();
@@ -111,5 +114,13 @@ public class VylariaAPI extends JavaPlugin
 
     public RedisBan getRedisBan() {
         return redisBan;
+    }
+
+    public InventoryManager getInventoryManager(){
+        return inventoryManager;
+    }
+
+    public RedisMute getRedisMute() {
+        return redisMute;
     }
 }
