@@ -1,13 +1,15 @@
 package fr.vylaria.api;
 
 import fr.vylaria.api.account.RedisAccount;
+import fr.vylaria.api.account.ban.RedisBan;
 import fr.vylaria.api.account.settings.RedisSetting;
 import fr.vylaria.api.bungeecord.BungeeChannelApi;
 import fr.vylaria.api.commands.manager.CommandsManager;
 import fr.vylaria.api.data.redis.RedisConnection;
 import fr.vylaria.api.data.redis.RedisCredentials;
-import fr.vylaria.api.events.manager.EventsManager;
+import fr.vylaria.api.listeners.manager.EventsManager;
 import fr.vylaria.api.inventory.InventoryUtils;
+import fr.vylaria.api.inventory.inventories.manager.InventoryManager;
 import fr.vylaria.api.socket.SocketConnection;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,9 +23,11 @@ public class VylariaAPI extends JavaPlugin
     private RedisConnection redisConnection;
     private RedisAccount redisAccount;
     private RedisSetting redisSetting;
+    private RedisBan redisBan;
 
     private CommandsManager commandsManager;
     private EventsManager eventsManager;
+    private InventoryManager inventoryManager;
 
     private BungeeChannelApi bungeeChannelApi;
 
@@ -38,9 +42,10 @@ public class VylariaAPI extends JavaPlugin
 
         redisConnection = new RedisConnection(new RedisCredentials("play.vylaria.eu", 6379, "bJEAc6z8TIuw7kPa", "root"), 0);
         redisConnection.init();
-        redisAccount = new RedisAccount();
 
+        redisAccount = new RedisAccount();
         redisSetting = new RedisSetting();
+        redisBan = new RedisBan();
 
         commandsManager = new CommandsManager(this);
         commandsManager.register();
@@ -51,6 +56,9 @@ public class VylariaAPI extends JavaPlugin
 
         eventsManager = new EventsManager(this);
         eventsManager.register();
+
+        inventoryManager = new InventoryManager(this);
+        inventoryManager.register();
 
         try {
             sc = new SocketConnection("play.vylaria.eu", 8080);
@@ -101,4 +109,7 @@ public class VylariaAPI extends JavaPlugin
         return sc;
     }
 
+    public RedisBan getRedisBan() {
+        return redisBan;
+    }
 }

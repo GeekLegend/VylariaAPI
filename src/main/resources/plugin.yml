@@ -18,3 +18,5 @@ commands:
   mod:
     aliases:
       - "modo"
+  ss:
+    description: "ban"

@@ -31,10 +31,15 @@ import java.util.List;
 public class ModCommand implements CommandExecutor {
 
     public static List<Player> vanishedPlayers = new ArrayList<>();
+    public static List<Player> freezePlayers = new ArrayList<>();
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) return false;
+        if (args.length > 1){
+            sender.sendMessage("§7[§dMod§7] Usage: /mod");
+            return false;
+        }
 
         Player p = (Player) sender;
 
