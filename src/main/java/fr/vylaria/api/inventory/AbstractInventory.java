@@ -1,6 +1,5 @@
 package fr.vylaria.api.inventory;
 
-import fr.vylaria.api.sanctions.Sanctions;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;

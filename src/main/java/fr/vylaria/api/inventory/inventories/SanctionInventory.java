@@ -23,11 +23,11 @@ public class SanctionInventory extends AbstractInventory implements Listener {
     private String player;
 
     public SanctionInventory() {
-        super(6*9, "SS >> <player>");
+        super(6*9, "§4SS §7>> §6<player>");
     }
 
     public SanctionInventory(String player) {
-        super(6*9, "SS >> " + player);
+        super(6*9, "§4SS §7>> §6" + player);
         this.player = player;
     }
 
@@ -91,7 +91,7 @@ public class SanctionInventory extends AbstractInventory implements Listener {
         ClickType clickType = event.getClick();
         ItemStack item = event.getCurrentItem();
 
-        if (inventory != null && inventory.getName().startsWith("SS >> ") && !inventory.getName().startsWith("SS >> Messages >>"))
+        if (inventory != null && inventory.getName().startsWith("§4SS §7>> ") && !inventory.getName().equalsIgnoreCase("§4SS §7>> §6Messages"))
         {
             event.setCancelled(true);
 

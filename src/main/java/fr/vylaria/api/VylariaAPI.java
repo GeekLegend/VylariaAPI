@@ -2,6 +2,7 @@ package fr.vylaria.api;
 
 import fr.vylaria.api.account.RedisAccount;
 import fr.vylaria.api.account.ban.RedisBan;
+import fr.vylaria.api.account.link.RedisLink;
 import fr.vylaria.api.account.mute.RedisMute;
 import fr.vylaria.api.account.settings.RedisSetting;
 import fr.vylaria.api.bungeecord.BungeeChannelApi;
@@ -11,6 +12,7 @@ import fr.vylaria.api.data.redis.RedisCredentials;
 import fr.vylaria.api.listeners.manager.EventsManager;
 import fr.vylaria.api.inventory.InventoryUtils;
 import fr.vylaria.api.inventory.inventories.manager.InventoryManager;
+import fr.vylaria.api.queue.QueueManager;
 import fr.vylaria.api.socket.SocketConnection;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -26,10 +28,12 @@ public class VylariaAPI extends JavaPlugin
     private RedisSetting redisSetting;
     private RedisBan redisBan;
     private RedisMute redisMute;
+    private RedisLink redisLink;
 
     private CommandsManager commandsManager;
     private EventsManager eventsManager;
     private InventoryManager inventoryManager;
+    private QueueManager queueManager;
 
     private BungeeChannelApi bungeeChannelApi;
 
@@ -45,24 +49,6 @@ public class VylariaAPI extends JavaPlugin
         redisConnection = new RedisConnection(new RedisCredentials("play.vylaria.eu", 6379, "bJEAc6z8TIuw7kPa", "root"), 0);
         redisConnection.init();
 
-        redisAccount = new RedisAccount();
-        redisSetting = new RedisSetting();
-        redisBan = new RedisBan();
-        redisMute = new RedisMute();
-
-        commandsManager = new CommandsManager(this);
-        commandsManager.register();
-
-        bungeeChannelApi = BungeeChannelApi.of(this);
-
-        iu = new InventoryUtils();
-
-        eventsManager = new EventsManager(this);
-        eventsManager.register();
-
-        inventoryManager = new InventoryManager(this);
-        inventoryManager.register();
-
         try {
             sc = new SocketConnection("play.vylaria.eu", 8080);
         } catch (URISyntaxException e) {
@@ -71,13 +57,32 @@ public class VylariaAPI extends JavaPlugin
 
         sc.send("refreshServerStatus", this.getServer().getMotd());
 
+        redisAccount = new RedisAccount();
+        redisSetting = new RedisSetting();
+        redisBan = new RedisBan();
+        redisMute = new RedisMute();
+        redisLink = new RedisLink();
+
+        commandsManager = new CommandsManager(this);
+        eventsManager = new EventsManager(this);
+        inventoryManager = new InventoryManager(this);
+        queueManager = new QueueManager();
+
+        commandsManager.register();
+        eventsManager.register();
+        inventoryManager.register();
+
+        bungeeChannelApi = BungeeChannelApi.of(this);
+
+        iu = new InventoryUtils();
     }
 
     @Override
     public void onDisable()
     {
-        sc.send("refreshServerStatus", this.getServer().getMotd());
         instance = null;
+
+        sc.send("refreshServerStatus", this.getServer().getMotd());
     }
 
     public static VylariaAPI getInstance()
@@ -120,7 +125,16 @@ public class VylariaAPI extends JavaPlugin
         return inventoryManager;
     }
 
+    public QueueManager getQueueManager()
+    {
+        return queueManager;
+    }
+
     public RedisMute getRedisMute() {
         return redisMute;
+    }
+
+    public RedisLink getRedisLink() {
+        return redisLink;
     }
 }

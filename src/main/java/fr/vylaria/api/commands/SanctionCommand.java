@@ -32,7 +32,6 @@ public class SanctionCommand implements CommandExecutor {
             if (Bukkit.getServer().getOfflinePlayer(args[0]).hasPlayedBefore()){
                 OfflinePlayer victim = Bukkit.getServer().getOfflinePlayer(args[0]);
                 RedisBan redisBan = VylariaAPI.getInstance().getRedisBan();
-                System.out.println(redisBan.exists(victim.getUniqueId()));
                 p.openInventory(new SanctionInventory(victim.getName()).create(p));
             }else{
                 p.sendMessage("§7[§cSS§7] Ce joueur n'existe pas!");
